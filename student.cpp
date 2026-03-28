@@ -65,32 +65,35 @@ public:
     student s;
     int id;
     bool fount = false;
-    // while (true) {
-    cout << "Enter ID that user you can cheak : ";
-    cin >> id;
+    while (true) {
+      cout << "Enter ID that user you can cheak : ";
+      cin >> id;
 
-    // if (id == 0) {
-    //  cout << "ID cannot be 0 . Enter write id ." << endl;
-    //} else {
-    FILE *file = fopen("student.dat", "rb");
-    if (!file) {
-      cout << "No file found ." << endl;
-      return;
-    }
-    while (fread(&s, sizeof(student), 1, file)) {
-      if (s.id == id) {
-        cout << "\n--- Student Found ---\n";
-        cout << "ID      : " << s.id << "\n";
-        cout << "Name    : " << s.name << "\n";
-        cout << "Mobile  : " << s.mobile_no << "\n";
-        cout << "Address : " << s.address << "\n";
-        fount = true;
-        break;
+      if (id == 0) {
+        cout << "ID cannot be 0 . Enter write id ." << endl;
+      } else {
+        FILE *file = fopen("student.dat", "rb");
+        if (!file) {
+          cout << "No file found ." << endl;
+          return;
+        }
+        while (fread(&s, sizeof(student), 1, file)) {
+          if (s.id == id) {
+            cout << "\n--- Student Found ---\n";
+            cout << "ID      : " << s.id << "\n";
+            cout << "Name    : " << s.name << "\n";
+            cout << "Mobile  : " << s.mobile_no << "\n";
+            cout << "Address : " << s.address << "\n";
+            fount = true;
+            return;
+          } else {
+            // cout << "not found Tuy again ." << endl;
+          }
+          cout << "Not found Try agein ." << endl;
+        }
+        fclose(file);
       }
     }
-    fclose(file);
-    //}
-    //}
   }
 };
 
