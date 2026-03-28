@@ -7,7 +7,7 @@ using namespace std;
 class Student {
 private:
 public:
-  void take_inp(void) {
+  void take_inp(void) { // That will for user input from school
     int roll, mob_no, perse;
     string fast_name, last_name, address, mobile_no;
     while (true) {
@@ -56,7 +56,27 @@ public:
     file.close();
     cout << "Student add completeddd... ;) " << endl;
   }
-  void cheak_id(void) {}
+  void cheak_id(void) {
+    int id;
+    cout << "Enter id to find student (If you show all student list then put 0 "
+            "): ";
+    cin >> id;
+    if (id == 0) { // That is for cheal all id ;
+      cout << "That is all user list :--- " << endl;
+      ifstream file("list.txt");
+      string line;
+
+      if (!file) {
+        cout << "File not open ." << endl;
+        return;
+      }
+
+      while (getline(file, line)) {
+        cout << line << endl;
+      }
+      file.close();
+    }
+  }
 };
 
 int main() {
