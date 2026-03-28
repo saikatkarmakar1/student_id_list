@@ -1,19 +1,26 @@
+#include <cstdio>
+#include <cstring>
 #include <fstream>
 #include <iostream>
 #include <string>
 
 using namespace std;
 
+struct student {
+  int id;
+  char name[50];
+  char mobile_no[15];
+  char address[100];
+};
 class Student {
 private:
 public:
   void take_inp(void) { // That will for user input from school
-    int roll, mob_no, perse;
-    string fast_name, last_name, address, mobile_no;
+    student s;
     while (true) {
       cout << "Enter student roll no : ";
-      cin >> roll;
-      string _roll_ = to_string(roll);
+      cin >> s.id;
+      string _roll_ = to_string(s.id);
       if (_roll_.length() == 0) {
         cout << "please enter Roll no" << endl;
       } else {
@@ -21,13 +28,12 @@ public:
       }
     }
     cout << "Enter student name : ";
-    cin >> fast_name >> last_name;
+    cin.getline(s.name, 50);
     while (true) {
       cout << "Enter Your mobile no (10 digit) : ";
-      cin >> mob_no;
-      mobile_no = to_string(mob_no);
+      cin.getline(s.mobile_no, 15);
 
-      if (mobile_no.length() == 10) {
+      if (strlen(s.mobile_no) == 10) {
         break;
       } else {
         cout << "Invalid! mobile no , Enter again . " << endl;
@@ -35,25 +41,16 @@ public:
     }
     while (true) {
       cout << "Enter address : ";
-      cin >> address;
-      if (address.length() == 0) {
+      cin.getline(s.address, 100);
+      if (strlen(s.address) == 0) {
         cout << "Please enter address . ";
       } else {
         break;
       }
     }
-    string roll_str = to_string(roll);
-    string total = "\nRoll no : " + roll_str + "\nName : " + fast_name + " " +
-                   last_name + "\nMobile No. : " + mobile_no +
-                   "\nAdress : " + address + "\n";
-    cout << total << endl;
-    ofstream file("list.txt", ios::app);
-    if (!file) {
-      cout << "File no open ," << endl;
-      return;
-    }
-    file << total;
-    file.close();
+    FILE *file = fopen("student.dat", "ab");
+    fwrite(&s, sizeof(student), 1, file);
+    fclose(file);
     cout << "Student add completeddd... ;) " << endl;
   }
   void cheak_id(void) {
