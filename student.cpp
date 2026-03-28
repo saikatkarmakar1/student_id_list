@@ -27,8 +27,16 @@ public:
         break;
       }
     }
-    cout << "Enter student name : ";
-    cin.getline(s.name, 50);
+    while (true) {
+      cout << "Enter student name : ";
+      cin.getline(s.name, 50);
+      if (strlen(s.name) == 0) {
+        cout << "Please Enter Your name : " << endl;
+      } else {
+        break;
+      }
+    }
+
     while (true) {
       cout << "Enter Your mobile no (10 digit) : ";
       cin.getline(s.mobile_no, 15);
