@@ -2,6 +2,7 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
+#include <ostream>
 #include <string>
 
 using namespace std;
@@ -95,6 +96,34 @@ public:
       }
     }
   }
+  void delete_id(void) {
+    student s;
+    int id;
+    bool find = false;
+    cout << "Enter Your id that you can delete : ";
+    cin >> id;
+    FILE *file = fopen("student.dat", "rb");
+    FILE *temp = fopen("temp.dat", "wb");
+
+    while (fread(&s, sizeof(student), 1, file) == 1) {
+      if (s.id == id) {
+        find = true; // skip that from file and delete it;
+      } else {
+        fwrite(&s, sizeof(student), 1, temp);
+      }
+    }
+
+    fclose(file);
+    fclose(temp);
+
+    if (find) {
+      remove("student.dat");
+      rename("temp.dat", "student.dat");
+      cout << "Delete done ;) " << endl;
+    } else {
+      cout << "id not found .";
+    }
+  }
 };
 
 int main() {
@@ -102,7 +131,8 @@ int main() {
   Student saikat;
   while (true) {
 
-    cout << "Student Page : \n1) Add user \n2) Cheak student\nEnter Your "
+    cout << "Student Page : \n1) Add user \n2) Cheak student\n3) Delete "
+            "id\nEnter Your "
             "option : ";
     cin >> option;
 
@@ -111,6 +141,9 @@ int main() {
       break;
     } else if (option == 2) {
       saikat.cheak_id();
+      break;
+    } else if (option == 3) {
+      saikat.delete_id();
       break;
     } else {
       cout << "You put wrong option . " << endl;
