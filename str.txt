@@ -1,6 +1,0 @@
-student manage :
-
-    1) add student (name , roll no , adress , mob no , reg):-
-                        1)file make (if does not exist )
-                        2)add name end of file 
-    2) cheak student :-

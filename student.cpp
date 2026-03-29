@@ -128,7 +128,7 @@ public:
 
 int main() {
   int option;
-  Student saikat;
+  Student s;
   while (true) {
 
     cout << "Student Page : \n1) Add user \n2) Cheak student\n3) Delete "
@@ -137,13 +137,13 @@ int main() {
     cin >> option;
 
     if (option == 1) {
-      saikat.take_inp();
+      s.take_inp();
       break;
     } else if (option == 2) {
-      saikat.cheak_id();
+      s.cheak_id();
       break;
     } else if (option == 3) {
-      saikat.delete_id();
+      s.delete_id();
       break;
     } else {
       cout << "You put wrong option . " << endl;
